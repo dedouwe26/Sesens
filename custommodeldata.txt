@@ -1,0 +1,18 @@
+shulker_shell: 13474: Storage warper: blue
+
+Globe_banner_pattern:   48360: Nature: green
+                        48361: dark: black
+                        48362: light: yellow
+                        48363: fire: red
+                        48364: ground: brown
+                        48365: air: white
+                        48366: unobtainable: light_purple
+
+noteblock:
+        DRAGON-sharp-2: A: Storage
+                        B: 
+                        C:
+                        D:
+                        E:
+                        F:
+                        G:

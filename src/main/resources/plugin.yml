@@ -1,0 +1,25 @@
+name: "Sesens"
+main: "nl.dedouwe.Plugin"
+version: "1.0-SNAPSHOT"
+api-version: '1.20'
+description: "This is a plugin that adds the power to cast powerful spells called 'Sesens' scattered around the world."
+author: "dedouwe"
+website: "https://dedouwe.nl"
+prefix: "Sesens"
+permissions:
+  sesens.command.use:
+    description: "Can use the command of Sesens"
+  sesens.command.admin:
+    default: op
+    description: "Can use admin commands of Sesens"
+  sesens.setStorage:
+    description: "Can set its own Sesens storage"
+  sesens.canUseScroll:
+    description: "Can use Sesens Scrolls"
+commands:
+  sesens:
+    description: "The main command of Sesens"
+    usage: "/sesens <storage:lvl:setlvl:give:startcycle:help> [item?:player?] [lvl?]"
+    aliases: ["sesens", "sesen", "ses"]
+    permission: "sesens.command.use"
+    permission-message: "§4You can't use this command!"
