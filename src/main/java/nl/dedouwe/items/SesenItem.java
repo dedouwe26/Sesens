@@ -8,7 +8,10 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+
 import net.kyori.adventure.text.TextComponent;
+import nl.dedouwe.Plugin;
 import nl.dedouwe.events.ItemEvent;
 
 public abstract class SesenItem {
@@ -36,8 +39,10 @@ public abstract class SesenItem {
         a.lore(lore);
         a.displayName(name);
         a.setCustomModelData(customModelData);
-        item.setItemMeta(a);
         this.name = name.content().replace(" ", "_").toLowerCase();
+        a.getPersistentDataContainer().set(Plugin.instance.key, PersistentDataType.STRING, this.name);
+        item.setItemMeta(a);
+        
     }
     public abstract void onEvent(PlayerEvent e, ItemEvent type);
     public abstract TextComponent GetHelp();

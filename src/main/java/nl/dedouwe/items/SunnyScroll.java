@@ -29,8 +29,8 @@ public class SunnyScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetHelp'");
+        return Component.text("Right-click or shift-right-click for").color(NamedTextColor.GRAY)
+            .append(Component.text("God Tier Powers").color(NamedTextColor.GOLD));
     }
     
 }

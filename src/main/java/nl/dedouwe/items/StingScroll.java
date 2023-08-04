@@ -29,8 +29,10 @@ public class StingScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetHelp'");
+        return Component
+            .text("To use this right-click on a player")
+            .color(NamedTextColor.GRAY);
+
     }
     
 }

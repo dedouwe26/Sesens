@@ -25,18 +25,19 @@ public class SesensListener implements Listener {
         if (e.getHand() == EquipmentSlot.HAND)
             return;
         
-        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
+        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getPlayer().isSneaking())
                 Items.onEvent(e.getItem(), e, ItemEvent.Deactivate);
             else {
                 Items.onEvent(e.getItem(), e, ItemEvent.Use);
             }
-        else if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK)
+        }
+        else if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
             if (e.getPlayer().isSneaking())
                 Items.onEvent(e.getItem(), e, ItemEvent.Activate);
             else
                 Items.onEvent(e.getItem(), e, ItemEvent.Hit);
-        e.getPlayer().sendMessage("ok");
+        }
     }
     @EventHandler
     void onItemDrop(PlayerDropItemEvent e) {

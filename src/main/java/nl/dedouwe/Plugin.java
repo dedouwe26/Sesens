@@ -1,6 +1,8 @@
 package nl.dedouwe;
 
 import java.util.logging.Logger;
+
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import nl.dedouwe.commands.SesensCommand;
@@ -12,10 +14,15 @@ import nl.dedouwe.utils.ConfigUtil;
  */
 public class Plugin extends JavaPlugin
 {
-    private static final Logger LOGGER=Logger.getLogger("sesens");
+    public static Plugin instance;
+
+    private static final Logger LOGGER=Logger.getLogger("Sesens");
+
+    public NamespacedKey key = new NamespacedKey(this, "sesens");
 
     public void onEnable()
     {
+        instance = this;
         saveDefaultConfig();
 
         new Sesens(new ConfigUtil(getConfig(), this), this);

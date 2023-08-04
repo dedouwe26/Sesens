@@ -19,7 +19,10 @@ public class ConfigUtil {
         return new Location(Bukkit.getWorld((String)configFile.get("players."+p.toString()+".storageWorld")), (double)configFile.get("players."+p.toString()+".storageX"), (double)configFile.get("players."+p.toString()+".storageY"), (double)configFile.get("players."+p.toString()+".storageZ"));
     }
     public double GetPlayerLevel(UUID p) {
-        return (double)configFile.get("players."+p.toString()+".lvl");
+        if (configFile.contains("players."+p.toString()+".lvl"))
+            return (double)configFile.get("players."+p.toString()+".lvl");
+        SetLevel(p, 0);
+        return 0;
     }
     public void SetLevel(UUID p, double lvl) {
         configFile.set("players."+p.toString()+".lvl", lvl);

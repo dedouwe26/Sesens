@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Nameable;
 import org.bukkit.block.Container;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -21,7 +22,7 @@ public class Sesens {
         config = c;
     }
     public void StartCycle () {
-
+        // TODO
     }
     public void showPlayerStorage (Player p, Player toSee) {
         if (config.getPlayerStorage(toSee.getUniqueId()) == null ) {
@@ -53,25 +54,31 @@ public class Sesens {
             .append(
                 Component.text("Storage")
                 .color(TextColor.color(153,97,0))
-                .decorate(TextDecoration.BOLD)
             )
         );
     }
     public void GiveItem(Player p, String name) {
-        if (Items.GetItem(name) == null) {
+        if (Items.Items.get(name) == null) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You must define a real Sesen Item..."));
             return;
         }
-        p.getInventory().addItem(Items.GetItem(name).item);
+        p.getInventory().addItem(Items.Items.get(name).item);
     }
     public void Help(Player p, String item) {
-        if (Items.GetItem(item) == null) {
-            if (Items.ItemsByItemStack.get(p.getInventory().getItemInMainHand()) == null) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Hold a Sesen Item or type the name of it in..."));
+        if (Items.Items.get(item) == null) {
+            // NO itemMeta
+            if (!p.getInventory().getItemInMainHand().hasItemMeta()) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Hold a Sesen Item or type in the name of it in..."));
+                return;
             }
-            p.sendMessage(Items.ItemsByItemStack.get(p.getInventory().getItemInMainHand()).GetHelp());
+            // No sesenItem
+            if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(Plugin.instance.key, PersistentDataType.STRING)) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Hold a Sesen Item or type in the name of it in..."));
+                return;
+            }
+            p.sendMessage(Items.Items.get(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(Plugin.instance.key, PersistentDataType.STRING)).GetHelp());
         } else {
-            p.sendMessage(Items.GetItem(item).GetHelp());
+            p.sendMessage(Items.Items.get(item).GetHelp());
         }
     }
 }

@@ -22,7 +22,7 @@ public class SesensCommand implements TabExecutor {
             sender.sendMessage("Must be a player");
             return true;
         }
-        if (args.length > 3)
+        if (args.length > 3 || args.length <= 0)
             return false;
         if (!(sender.hasPermission("sesens.command.admin")) && Arrays.asList("startcycle", "give", "setlvl", "storage").contains(args[0])) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You can't use this sub-command!"));
