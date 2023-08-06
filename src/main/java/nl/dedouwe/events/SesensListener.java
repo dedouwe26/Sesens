@@ -1,10 +1,12 @@
 package nl.dedouwe.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 import nl.dedouwe.Plugin;
@@ -42,6 +44,11 @@ public class SesensListener implements Listener {
     @EventHandler
     void onItemDrop(PlayerDropItemEvent e) {
         Items.onEvent(e.getItemDrop().getItemStack(), e, ItemEvent.Drop);
+    }
+
+    @EventHandler
+    void onPlayerJoin(PlayerJoinEvent e) {
+        e.getPlayer().setResourcePack(Bukkit.getResourcePack(), Bukkit.getResourcePackHash(), true);
     }
 
 }

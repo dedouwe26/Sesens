@@ -6,6 +6,42 @@
   "overrides": [
     {
       "predicate": {
+        "custom_model_data": 48366
+      },
+      "model": "minecraft:item/unobtainable_scroll"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48365
+      },
+      "model": "minecraft:item/air_scroll"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48364
+      },
+      "model": "minecraft:item/ground_scroll"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48363
+      },
+      "model": "minecraft:item/fire_scroll"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48362
+      },
+      "model": "minecraft:item/light_scroll"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48361
+      },
+      "model": "minecraft:item/dark_scroll"
+    },
+    {
+      "predicate": {
         "custom_model_data": 48360
       },
       "model": "minecraft:item/nature_scroll"

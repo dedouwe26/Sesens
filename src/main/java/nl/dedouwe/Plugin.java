@@ -14,6 +14,8 @@ import nl.dedouwe.utils.ConfigUtil;
  */
 public class Plugin extends JavaPlugin
 {
+    // TODO: resource pack: mc-packs.net
+
     public static Plugin instance;
 
     private static final Logger LOGGER=Logger.getLogger("Sesens");
