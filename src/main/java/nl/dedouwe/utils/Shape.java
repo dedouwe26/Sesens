@@ -1,25 +1,31 @@
 package nl.dedouwe.utils;
 
-import java.lang.reflect.Executable;
-import java.util.ArrayList;
-import java.util.function.Function;
-
-import org.bukkit.Location;
+import java.util.function.Consumer;
 
 public class Shape {
     public static Shape CreateSphere(double radius) {
-        return new Shape((object a) -> {
-            return new double[][];
+        return new Shape((Consumer<double[]> a) -> {
         });
+    }
+
+    public static Shape CreateSpiral(double size, double height) {
+        return new Shape((Consumer<double[]> a) -> {
+            
+        });
+        
     }
 
 
     // Shape instance
-    public Shape(Function<Object, Double[][]> point) {
-        
+    private Consumer<Consumer<double[]>> points;
+
+
+    public Shape(Consumer<Consumer<double[]>> p) {
+        this.points = p;
     }
 
-    public void Draw(Location l) {
-        // TODO
+
+    public void Make(Consumer<double[]> maker) {
+        points.accept(maker);
     }
 }

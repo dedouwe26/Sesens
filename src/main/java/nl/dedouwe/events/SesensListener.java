@@ -1,6 +1,5 @@
 package nl.dedouwe.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -16,12 +15,7 @@ public class SesensListener implements Listener {
     public SesensListener(Plugin pl) {
         pl.getServer().getPluginManager().registerEvents(this, pl);
     }
-    // @EventHandler
-    // void onClickInventory(InventoryClickEvent e) {
-    //     if (!(((TextComponent)e.getView().title()).equals(Sesens.storageName))) {
-    //         return;
-    //     }
-    // }
+    
     @EventHandler
     void onItemUse(PlayerInteractEvent e) {
         if (e.getHand() == EquipmentSlot.HAND)
@@ -48,7 +42,7 @@ public class SesensListener implements Listener {
 
     @EventHandler
     void onPlayerJoin(PlayerJoinEvent e) {
-        e.getPlayer().setResourcePack(Bukkit.getResourcePack(), Bukkit.getResourcePackHash(), true);
+        e.getPlayer().setResourcePack("https://download.mc-packs.net/pack/debd8a037d35462cb88e302210481bbbc139d814.zip", "debd8a037d35462cb88e302210481bbbc139d814", true);
     }
 
 }
