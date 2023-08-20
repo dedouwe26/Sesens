@@ -1,12 +1,9 @@
 package nl.dedouwe.items;
 
-import org.bukkit.event.player.PlayerEvent;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import nl.dedouwe.events.ItemEvent;
 
 public class SunnyScroll extends Scroll {
 
@@ -22,15 +19,9 @@ public class SunnyScroll extends Scroll {
     }
 
     @Override
-    public void onEvent(PlayerEvent e, ItemEvent type) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onEvent'");
-    }
-
-    @Override
     public TextComponent GetHelp() {
-        return Component.text("Right-click or shift-right-click for").color(NamedTextColor.GRAY)
-            .append(Component.text("God Tier Powers").color(NamedTextColor.GOLD));
+        return Component.text("Right-click or shift-right-click for ").color(NamedTextColor.GRAY)
+            .append(Component.text("Cool Powers").color(NamedTextColor.GOLD));
     }
-    
+    // TODO: funcionality
 }

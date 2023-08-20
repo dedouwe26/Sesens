@@ -16,6 +16,8 @@ public class ConfigUtil {
         plugin = p;
     }
     public Location getPlayerStorage(UUID p) {
+        if (configFile.get("players."+p.toString()+".storageWorld") == null)
+            return null;
         return new Location(Bukkit.getWorld((String)configFile.get("players."+p.toString()+".storageWorld")), (double)configFile.get("players."+p.toString()+".storageX"), (double)configFile.get("players."+p.toString()+".storageY"), (double)configFile.get("players."+p.toString()+".storageZ"));
     }
     public double GetPlayerLevel(UUID p) {

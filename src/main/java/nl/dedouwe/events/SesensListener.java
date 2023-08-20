@@ -1,12 +1,15 @@
 package nl.dedouwe.events;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 import nl.dedouwe.Plugin;
 import nl.dedouwe.items.Items;
@@ -18,31 +21,45 @@ public class SesensListener implements Listener {
     
     @EventHandler
     void onItemUse(PlayerInteractEvent e) {
-        if (e.getHand() == EquipmentSlot.HAND)
-            return;
+        // if (e.getHand() == EquipmentSlot.HAND)
+        //     return;
         
+        // e.getPlayer().sendMessage(e.getPlayer().getInventory().getItemInMainHand().displayName());
+        if (!e.hasItem()||e.getItem().getType()==Material.AIR) 
+            return;
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getPlayer().isSneaking())
-                Items.onEvent(e.getItem(), e, ItemEvent.Deactivate);
+                Items.onDeactivate(e.getItem(), e);
             else {
-                Items.onEvent(e.getItem(), e, ItemEvent.Use);
+                Items.onUse(e.getItem(), e);
             }
         }
         else if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
             if (e.getPlayer().isSneaking())
-                Items.onEvent(e.getItem(), e, ItemEvent.Activate);
+                Items.onActivate(e.getItem(), e);
             else
-                Items.onEvent(e.getItem(), e, ItemEvent.Hit);
+                Items.onHit(e.getItem(), e);
         }
     }
     @EventHandler
     void onItemDrop(PlayerDropItemEvent e) {
-        Items.onEvent(e.getItemDrop().getItemStack(), e, ItemEvent.Drop);
+        Items.onDrop(e.getItemDrop().getItemStack(), e);
     }
 
     @EventHandler
     void onPlayerJoin(PlayerJoinEvent e) {
-        e.getPlayer().setResourcePack("https://download.mc-packs.net/pack/debd8a037d35462cb88e302210481bbbc139d814.zip", "debd8a037d35462cb88e302210481bbbc139d814", true);
+        e.getPlayer().setResourcePack("https://dedouwe26.github.io/SesensPack.zip", "61B96B57E6499534157EF8D45CD11FCEB493168D", true);
     }
 
+    @EventHandler
+    void onPlayerAttack(EntityDamageByEntityEvent e) {
+        if (!(e.getDamager() instanceof Player) || !(e.getCause().equals(DamageCause.ENTITY_ATTACK))) {
+            return;
+        }
+        if (e.getDamager().isSneaking()) {
+            Items.onActivate(((Player)e.getDamager()).getInventory().getItemInMainHand(), e);
+        } else {
+            Items.onHit(((Player)e.getDamager()).getInventory().getItemInMainHand(), e);
+        }
+    }
 }

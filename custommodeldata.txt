@@ -6,13 +6,5 @@ Globe_banner_pattern:   48360: Nature: green
                         48363: fire: red
                         48364: ground: brown
                         48365: air: white
-                        48366: unobtainable: light_purple
-
-noteblock:
-        DRAGON-sharp-2: A: Storage
-                        B: 
-                        C:
-                        D:
-                        E:
-                        F:
-                        G:
+                        48366: water: blue
+                        48367: unobtainable: light_purple
