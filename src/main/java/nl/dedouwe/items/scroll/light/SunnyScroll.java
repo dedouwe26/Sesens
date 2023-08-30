@@ -1,9 +1,10 @@
-package nl.dedouwe.items;
+package nl.dedouwe.items.scroll.light;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import nl.dedouwe.items.Scroll;
+import nl.dedouwe.items.Sources;
 
 public class SunnyScroll extends Scroll {
 
@@ -13,7 +14,6 @@ public class SunnyScroll extends Scroll {
             .append(
                 Component.text("Friend")
                 .color(NamedTextColor.GOLD)
-                .decorate(TextDecoration.BOLD)
             )
         );
     }
@@ -23,5 +23,5 @@ public class SunnyScroll extends Scroll {
         return Component.text("Right-click or shift-right-click for ").color(NamedTextColor.GRAY)
             .append(Component.text("Cool Powers").color(NamedTextColor.GOLD));
     }
-    // TODO: funcionality
+    // TODO: functionality
 }

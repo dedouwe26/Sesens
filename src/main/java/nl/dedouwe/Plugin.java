@@ -9,7 +9,7 @@ import nl.dedouwe.commands.SesensCommand;
 import nl.dedouwe.events.SesensListener;
 import nl.dedouwe.utils.ConfigUtil;
 
-/*
+/**
  * sesens java plugin
  */
 public class Plugin extends JavaPlugin
@@ -18,14 +18,17 @@ public class Plugin extends JavaPlugin
 
     private static final Logger LOGGER=Logger.getLogger("Sesens");
 
-    public NamespacedKey key = new NamespacedKey(this, "sesens");
+    public NamespacedKey SesenType = new NamespacedKey(this, "type");
+    public NamespacedKey SesenInstance = new NamespacedKey(this, "instance");
+
+    public ConfigUtil config = new ConfigUtil(getConfig(), this);
 
     public void onEnable()
     {
         instance = this;
         saveDefaultConfig();
 
-        new Sesens(new ConfigUtil(getConfig(), this), this);
+        new Sesens(config, this);
         getCommand("sesens").setExecutor(new SesensCommand());
 
         new SesensListener(this);

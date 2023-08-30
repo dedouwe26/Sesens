@@ -21,13 +21,32 @@ public class Shape {
         });
     }
 
-    public static Shape CreateSpiral(double density, double height) {
+    public static Shape CreateSpiral(double density, double height, double width) {
         return new Shape((Consumer<Vector> maker) -> {
             for (double i = 0; i <= height; i+=height/density) {
-                
+                maker.accept(new Vector(i*width*Math.sin(i), i, i*Math.cos(i)*width));
             }
         });
         
+    }
+    public static Shape CreateBeam(double size, double density, double height) {
+        return new Shape((Consumer<Vector> maker) -> {
+            for (double y = 0; y < height; y+=height/density) {
+                for (double i = 0; i < Math.PI * 2; i+=Math.PI/density) {
+                    maker.accept(new Vector(Math.cos(i) * size, y, Math.sin(i)*size));
+                }
+            }
+        });
+    }
+    public static Shape CreateCircle (double radius, double density) {
+        return new Shape((Consumer<Vector> maker) -> {
+            for (double i = 0; i < Math.PI; i+=Math.PI/density) {
+                double subRadius = i/Math.PI*radius;
+                for (double j = 0; j < Math.PI * 2; j+=Math.PI/density) {
+                    maker.accept(new Vector(Math.cos(j)*subRadius, 0, Math.sin(j)*subRadius));
+                }
+            }
+        });
     }
 
 

@@ -13,6 +13,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.md_5.bungee.api.ChatColor;
 import nl.dedouwe.Sesens;
 import nl.dedouwe.items.Items;
+import nl.dedouwe.items.SesenItem;
 
 public class SesensCommand implements TabExecutor {
     @Override
@@ -25,7 +26,7 @@ public class SesensCommand implements TabExecutor {
         if (args.length > 3 || args.length <= 0)
             return false;
         if (!(sender.hasPermission("sesens.command.admin"))
-                && Arrays.asList("startcycle", "give", "setlvl", "storage").contains(args[0])) {
+                && Arrays.asList("startcycle", "give", "setlvl").contains(args[0])) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You can't use this sub-command!"));
             return true;
         }
@@ -34,6 +35,9 @@ public class SesensCommand implements TabExecutor {
                 if (!(sender.hasPermission("sesens.command.admin"))) {
                     Sesens.instance.showPlayerStorage((Player) sender, (Player) sender);
                 } else {
+                    if (args.length != 2) {
+                        return false;
+                    }
                     if (Bukkit.getPlayer(args[1]) == null) {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                                 "&4You have admin privileges, so You must define real online player..."));
@@ -58,10 +62,18 @@ public class SesensCommand implements TabExecutor {
                 break;
             case "give":
                 if (args.length == 2)
-                    Sesens.instance.GiveItem((Player) sender, args[1]);
+                    if (Items.ItemTypes.containsKey(args[1])) {
+                        SesenItem.CreateInstance(args[1]).GiveTo((Player)sender);
+                    } else {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            "&4Please put a valid item..."));
+                    }
                 break;
             case "setlvl":
-                if (!(args.length == 3) && Bukkit.getPlayer(args[1]) == null) {
+                if (args.length != 3) {
+                    return false;
+                }
+                if (args[2]=="" && Bukkit.getPlayer(args[1]) == null) {
                     sender.sendMessage(
                             ChatColor.translateAlternateColorCodes('&', "&4You must define real online player..."));
                 } else {
@@ -112,10 +124,10 @@ public class SesensCommand implements TabExecutor {
                     break;
                 case "give":
                     if (sender.hasPermission("sesens.command.admin"))
-                        tabs.addAll(Items.Items.keySet());
+                        tabs.addAll(Items.ItemTypes.keySet());
                     break;
                 case "help":
-                    tabs.addAll(Items.Items.keySet());
+                    tabs.addAll(Items.ItemTypes.keySet());
                     break;
                 default:
                     break;

@@ -15,10 +15,11 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.md_5.bungee.api.ChatColor;
 import nl.dedouwe.items.Items;
+import nl.dedouwe.items.SesenItem;
 import nl.dedouwe.utils.ConfigUtil;
 
 public class Sesens {
-    private ConfigUtil config;
+    public ConfigUtil config;
     public static Sesens instance;
 
     public Sesens(ConfigUtil c, Plugin pl) {
@@ -69,16 +70,8 @@ public class Sesens {
         new ParticleBuilder(Particle.TOTEM).location(l.add(.5, 1.3, .5)).count(40).spawn();
     }
 
-    public void GiveItem(Player p, String name) {
-        if (Items.Items.get(name) == null) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You must define a real Sesen Item..."));
-            return;
-        }
-        p.getInventory().addItem(Items.Items.get(name).item);
-    }
-
     public void Help(Player p, String item) {
-        if (item == null || Items.Items.get(item) == null) {
+        if (item == null || Items.ItemTypes.get(item) == null) {
             // NO itemMeta
             if (!p.getInventory().getItemInMainHand().hasItemMeta()) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&',
@@ -87,15 +80,16 @@ public class Sesens {
             }
             // No sesenItem
             if (!(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer()
-                    .has(Plugin.instance.key, PersistentDataType.STRING))) {
+                    .has(Plugin.instance.SesenType, PersistentDataType.STRING))) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&',
                         "&4Hold a Sesen Item or type in the name of it in..."));
                 return;
             }
-            p.sendMessage(Items.Items.get(p.getInventory().getItemInMainHand().getItemMeta()
-                    .getPersistentDataContainer().get(Plugin.instance.key, PersistentDataType.STRING)).GetHelp());
+            p.sendMessage(SesenItem.getInstance(p.getInventory().getItemInMainHand().getItemMeta()
+                    .getPersistentDataContainer().get(Plugin.instance.SesenInstance, PersistentDataType.STRING), p.getInventory().getItemInMainHand().getItemMeta()
+                    .getPersistentDataContainer().get(Plugin.instance.SesenType, PersistentDataType.STRING)).GetHelp());
         } else {
-            p.sendMessage(Items.Items.get(item).GetHelp());
+            p.sendMessage(Items.ItemTypes.get(item).GetHelp());
         }
     }
 }
