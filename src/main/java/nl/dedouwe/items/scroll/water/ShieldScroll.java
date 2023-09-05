@@ -1,5 +1,21 @@
 package nl.dedouwe.items.scroll.water;
 
-public class ShieldScroll {
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import nl.dedouwe.items.Scroll;
+import nl.dedouwe.items.Sources;
+
+public class ShieldScroll extends Scroll {
+
+    public ShieldScroll() {
+        super(Sources.Water, "Shield", Component.text("You need a cover?").color(NamedTextColor.GRAY), 
+                                            Component.text("Gotchu.").color(NamedTextColor.GRAY));
+    }
+
+    @Override
+    public TextComponent GetHelp() {
+        return Component.text("").color(NamedTextColor.GRAY);
+    }
     
 }

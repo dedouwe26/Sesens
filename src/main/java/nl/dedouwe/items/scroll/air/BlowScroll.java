@@ -6,10 +6,11 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import nl.dedouwe.items.Scroll;
 import nl.dedouwe.items.Sources;
 
-public class DashScroll extends Scroll {
+public class BlowScroll extends Scroll {
 
-    public DashScroll() {
-        super(Sources.Air, "Dash", Component.text("Elytra's are useless now!").color(NamedTextColor.GRAY));
+    public BlowScroll() {
+        super(Sources.Air, "Blow", Component.text("It's a bit windy outside.").color(NamedTextColor.GRAY), 
+                                                Component.text("Go game some more").color(NamedTextColor.DARK_GRAY));
     }
 
     @Override

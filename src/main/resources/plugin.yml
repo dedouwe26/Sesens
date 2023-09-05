@@ -9,13 +9,16 @@ prefix: "Sesens"
 permissions:
   sesens.command.use:
     description: "Can use the command of Sesens"
+    default: true
   sesens.command.admin:
     default: op
     description: "Can use admin commands of Sesens"
   sesens.setStorage:
     description: "Can set its own Sesens storage"
+    default: true
   sesens.canUseScroll:
     description: "Can use Sesens Scrolls"
+    default: true
 commands:
   sesens:
     description: "The main command of Sesens"
