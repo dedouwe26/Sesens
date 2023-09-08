@@ -31,6 +31,8 @@ import nl.dedouwe.items.scroll.water.TsunamiScroll;
 public class Items {
     public static HashMap<String, SesenItem> ItemTypes = new HashMap<>();
 
+    // TODO: for all: use LVL
+
     // Other
     public static final TestItem TEST_ITEM = (TestItem) AddItem(new TestItem());
     public static final ShaperItem SHAPER = (ShaperItem) AddItem(new ShaperItem());

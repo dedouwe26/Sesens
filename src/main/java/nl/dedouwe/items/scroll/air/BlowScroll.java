@@ -15,7 +15,7 @@ public class BlowScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Use shift-click for a big blast and without for a less big one").color(NamedTextColor.GRAY);
     }
     
 }

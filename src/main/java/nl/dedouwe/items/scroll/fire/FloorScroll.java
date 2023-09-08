@@ -15,7 +15,7 @@ public class FloorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("drop the item to summon the lava floor, left click to stop it.").color(NamedTextColor.GRAY);
     }
     
 }

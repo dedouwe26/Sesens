@@ -14,7 +14,7 @@ public class DashScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("While holding it press space to fly. Use shift + WASD to dash.").color(NamedTextColor.GRAY);
     }
     
 }

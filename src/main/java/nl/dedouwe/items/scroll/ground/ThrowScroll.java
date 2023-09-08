@@ -14,7 +14,7 @@ public class ThrowScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift left-click for a destructive big rock, hold left-click for medium rocks, hold right-click for dart stones").color(NamedTextColor.GRAY);
     }
     
 }

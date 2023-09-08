@@ -15,7 +15,7 @@ public class LayerScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Drop item to make a circle barrier, left click to smash other players nearby, shift right click to make a wall").color(NamedTextColor.GRAY);
     }
     
 }

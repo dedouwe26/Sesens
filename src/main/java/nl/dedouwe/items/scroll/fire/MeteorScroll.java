@@ -15,7 +15,7 @@ public class MeteorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift right click to summon one at crosshair, shift left click to summon at nearest player").color(NamedTextColor.GRAY);
     }
     
 }

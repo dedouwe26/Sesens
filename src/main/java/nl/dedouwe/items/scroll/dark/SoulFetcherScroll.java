@@ -15,7 +15,7 @@ public class SoulFetcherScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift right-click and hold to suck the energy out of the player, left-click to fetch their soul").color(NamedTextColor.GRAY);
     }
     
 }

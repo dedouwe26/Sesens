@@ -14,7 +14,7 @@ public class ThorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Use right-click for a lightning, and shift right-click for better one.").color(NamedTextColor.GRAY);
     }
     
 }
