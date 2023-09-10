@@ -17,6 +17,7 @@ import net.md_5.bungee.api.ChatColor;
 import nl.dedouwe.items.Items;
 import nl.dedouwe.items.SesenItem;
 import nl.dedouwe.utils.ConfigUtil;
+import nl.dedouwe.utils.ScrollUtil;
 
 public class Sesens {
     public ConfigUtil config;
@@ -26,6 +27,12 @@ public class Sesens {
         instance = this;
         config = c;
     }
+
+    /*
+     * Level:
+     * 1.00
+     * 0-99
+     */
 
     public void StartCycle() {
         // TODO
@@ -43,10 +50,16 @@ public class Sesens {
         p.openInventory(((Barrel) config.getPlayerStorage(toSee.getUniqueId()).getBlock().getState()).getInventory());
     }
 
+    public void ShowLevel(Player p) {
+        ScrollUtil.ShowProgressBar(p, (float)GetLevel(p), 100f, "Level");
+    }
+
     public double GetLevel(Player p) {
         return config.GetPlayerLevel(p.getUniqueId());
     }
-
+    public void AddLevel(Player p, double xp) {
+        SetLevel(p, GetLevel(p)+xp);
+    }
     public void SetLevel(Player p, double lvl) {
         config.SetLevel(p.getUniqueId(), lvl);
     }

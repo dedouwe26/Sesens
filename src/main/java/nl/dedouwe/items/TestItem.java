@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import nl.dedouwe.utils.ScrollUtil;
 
 public class TestItem extends SesenItem {
 
@@ -21,12 +22,15 @@ public class TestItem extends SesenItem {
     }
     public void onDeactivate(PlayerInteractEvent e) {
         e.getPlayer().sendMessage("Deactivate type of event...");
+        e.getPlayer().sendMessage(String.valueOf(ScrollUtil.TestLvlRestriction(e.getPlayer(), -1)));
     }
     public void onUse(PlayerInteractEvent e) {
         e.getPlayer().sendMessage("Use type of event...");
     }
     public void onActivate(PlayerInteractEvent e) {
         e.getPlayer().sendMessage("Activate type of event...");
+        e.getPlayer().sendMessage(String.valueOf(ScrollUtil.TestLvlRestriction(e.getPlayer(), 200)));
+        
     }
     public void onHit(PlayerInteractEvent e) {
         e.getPlayer().sendMessage("Hit type of event...");

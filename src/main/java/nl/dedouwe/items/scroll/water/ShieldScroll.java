@@ -15,7 +15,7 @@ public class ShieldScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift right-click for a longer shield, and right-click for a slower one.").color(NamedTextColor.GRAY);
     }
     
 }

@@ -14,7 +14,7 @@ public class GrowScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Use shift right-click to make a spiral shaped grow cast, use right-click to make something surrounded.").color(NamedTextColor.GRAY);
     }
     
 }

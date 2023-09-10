@@ -53,6 +53,7 @@ public class SesensCommand implements TabExecutor {
                                     + "&a's current level is &r&e&l"
                                     + Sesens.instance.GetLevel(Bukkit.getPlayer(args[1]))));
                 } else {
+                    Sesens.instance.ShowLevel((Player)sender);
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                             "&aYour current level is &r&e&l" + Sesens.instance.GetLevel((Player) sender)));
                 }

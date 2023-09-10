@@ -15,7 +15,7 @@ public class TsunamiScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift left-click for a tsunami, drop the item for a water splash.").color(NamedTextColor.GRAY);
     }
     
 }

@@ -15,7 +15,7 @@ public class EndScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Just left-click to end the world...").color(NamedTextColor.GRAY);
     }
     
 }

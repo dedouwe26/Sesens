@@ -15,7 +15,7 @@ public class BeaconScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("").color(NamedTextColor.GRAY);
+        return Component.text("Shift left-click to make an beam from the sky.").color(NamedTextColor.GRAY);
     }
     
 }
