@@ -1,5 +1,8 @@
 package nl.dedouwe.items.scroll.ground;
 
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -15,7 +18,9 @@ public class LayerScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Drop item to make a circle barrier, left click to smash other players nearby, shift right click to make a wall").color(NamedTextColor.GRAY);
+        return Component.text("Drop item to make a circle barrier, left-click to smash other players nearby, shift right-click to make a wall").color(NamedTextColor.GRAY);
     }
-    
+    public void onDrop(PlayerDropItemEvent e) {}
+    public void onHit(PlayerInteractEvent e) {}
+    public void onDeactivate(PlayerInteractEvent e) {}
 }

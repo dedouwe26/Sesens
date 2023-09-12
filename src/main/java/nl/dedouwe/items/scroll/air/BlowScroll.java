@@ -1,5 +1,7 @@
 package nl.dedouwe.items.scroll.air;
 
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -15,7 +17,9 @@ public class BlowScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Use shift-click for a big blast and without for a less big one").color(NamedTextColor.GRAY);
+        return Component.text("Use shift left-click for a big blast and without shift for a less big one.").color(NamedTextColor.GRAY);
     }
+    public void onActivate(PlayerInteractEvent e) {}
+    public void onHit(PlayerInteractEvent e) {}
     
 }

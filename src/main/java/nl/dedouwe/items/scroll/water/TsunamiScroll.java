@@ -1,5 +1,8 @@
 package nl.dedouwe.items.scroll.water;
 
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -18,4 +21,6 @@ public class TsunamiScroll extends Scroll {
         return Component.text("Shift left-click for a tsunami, drop the item for a water splash.").color(NamedTextColor.GRAY);
     }
     
+    public void onActivate(PlayerInteractEvent e) {}
+    public void onDrop(PlayerDropItemEvent e) {}
 }

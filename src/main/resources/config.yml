@@ -19,6 +19,6 @@ cycle:
   # storageY: double
   # storageZ: double
   # storageWorld: str
-  # lvl: float
+  # lvl: double
 
 players:

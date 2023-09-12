@@ -51,7 +51,7 @@ public class Sesens {
     }
 
     public void ShowLevel(Player p) {
-        ScrollUtil.ShowProgressBar(p, (float)GetLevel(p), 100f, "Level");
+        ScrollUtil.ShowProgressBar(p, (float)(GetLevel(p)-Math.floor(GetLevel(p))), 1f, "Level");
     }
 
     public double GetLevel(Player p) {

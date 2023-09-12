@@ -1,5 +1,7 @@
 package nl.dedouwe.items.scroll.water;
 
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -17,5 +19,7 @@ public class ShieldScroll extends Scroll {
     public TextComponent GetHelp() {
         return Component.text("Shift right-click for a longer shield, and right-click for a slower one.").color(NamedTextColor.GRAY);
     }
-    
+
+    public void onDeactivate(PlayerInteractEvent e) {}
+    public void onUse(PlayerInteractEvent e) {}
 }

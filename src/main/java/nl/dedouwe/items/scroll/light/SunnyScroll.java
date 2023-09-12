@@ -1,5 +1,7 @@
 package nl.dedouwe.items.scroll.light;
 
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -20,8 +22,12 @@ public class SunnyScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Right-click or shift-right-click for ").color(NamedTextColor.GRAY)
+        return Component.text("Right-click or shift right-click for ").color(NamedTextColor.GRAY)
             .append(Component.text("Cool Powers").color(NamedTextColor.GOLD));
     }
+
+    public void onUse(PlayerInteractEvent e) {}
+    public void onDeactivate(PlayerInteractEvent e) {}
+
     // TODO: functionality
 }

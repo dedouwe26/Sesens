@@ -1,5 +1,7 @@
 package nl.dedouwe.items.scroll.fire;
 
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -15,7 +17,9 @@ public class MeteorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Shift right click to summon one at crosshair, shift left click to summon at nearest player").color(NamedTextColor.GRAY);
+        return Component.text("Shift right-click to summon one at crosshair, shift left-click to summon at nearest player").color(NamedTextColor.GRAY);
     }
+    public void onDeactivate(PlayerInteractEvent e) {}
+    public void onActivate(PlayerInteractEvent e) {}
     
 }

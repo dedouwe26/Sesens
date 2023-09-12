@@ -1,5 +1,8 @@
 package nl.dedouwe.items.scroll.fire;
 
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -15,7 +18,8 @@ public class FloorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("drop the item to summon the lava floor, left click to stop it.").color(NamedTextColor.GRAY);
+        return Component.text("drop the item to summon the lava floor, left-click to stop it.").color(NamedTextColor.GRAY);
     }
-    
+    public void onDrop(PlayerDropItemEvent e) {}
+    public void onHit(PlayerInteractEvent e) {}
 }

@@ -3,24 +3,16 @@ package nl.dedouwe.utils;
 import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import nl.dedouwe.Plugin;
 import nl.dedouwe.Sesens;
 
 public class ScrollUtil {
-    // TODO: actionbar msg's and lvl restriction
 
     // Msg's
     public static void ShowProgressBar(Player p, float amount, float max, String name) {
         float progress = (amount/max)*10;
-        TextComponent bar = Component.text("");
-        // TODO: Make it work: input are full and not part of progress
-        for (int i = 1; i <= 10; i++) {
-            Plugin.instance.getLogger().info(String.valueOf(i));
-            bar.append(Component.text("|").color(progress >= i ? NamedTextColor.GREEN : NamedTextColor.WHITE));
-        }
+
         p.sendActionBar(Component
             .text(name)
             .color(NamedTextColor.AQUA)
@@ -28,9 +20,16 @@ public class ScrollUtil {
                 .text(" [")
                 .color(NamedTextColor.WHITE)
             )
-            .append(
-                bar
-            )
+            .append(Component.text("=").color(progress >= 1 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 2 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 3 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 4 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 5 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 6 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 7 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 8 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 9 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 10 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
             .append(Component
                 .text("] ")
                 .color(NamedTextColor.WHITE)

@@ -1,5 +1,7 @@
 package nl.dedouwe.items.scroll.unobtainable;
 
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -18,4 +20,5 @@ public class BeaconScroll extends Scroll {
         return Component.text("Shift left-click to make an beam from the sky.").color(NamedTextColor.GRAY);
     }
     
+    public void onActivate(PlayerInteractEvent e) {}
 }

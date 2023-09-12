@@ -127,11 +127,39 @@ public abstract class SesenItem {
 
     public abstract TextComponent GetHelp();
 
+    /**
+     * Shift right-click
+     * @param e
+     */
     public void onDeactivate(PlayerInteractEvent e) {}
+    /**
+     * right-click
+     * @param e
+     */
     public void onUse(PlayerInteractEvent e) {}
+    /**
+     * shift left-click
+     * @param e
+     */
     public void onActivate(PlayerInteractEvent e) {}
+    /**
+     * left-click
+     * @param e
+     */
     public void onHit(PlayerInteractEvent e) {}
+    /**
+     * Drop (q)
+     * @param e
+     */
     public void onDrop(PlayerDropItemEvent e) {}
+    /**
+     * Shift left-click HIT
+     * @param e
+     */
     public void onActivate(EntityDamageByEntityEvent e) {}
+    /**
+     * left-click HIT
+     * @param e
+     */
     public void onHit(EntityDamageByEntityEvent e) {}
 }

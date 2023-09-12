@@ -1,5 +1,8 @@
 package nl.dedouwe.items.scroll.dark;
 
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -16,5 +19,7 @@ public class ShadowScroll extends Scroll {
     public TextComponent GetHelp() {
         return Component.text("Drop the item for an BLACK HOLE, right-click to make an Shadow, with shift to make a Shadow Portal.").color(NamedTextColor.GRAY);
     }
-    
+    public void onDrop(PlayerDropItemEvent e) {}
+    public void onUse(PlayerInteractEvent e) {}
+    public void onDeactivate(PlayerInteractEvent e) {}
 }

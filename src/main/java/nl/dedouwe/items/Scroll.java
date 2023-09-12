@@ -44,5 +44,4 @@ public abstract class Scroll extends SesenItem {
     @Override
     public void onHit(EntityDamageByEntityEvent e) {e.setCancelled(true);}
 
-    // TODO: All scrolls use lvl things
 }
