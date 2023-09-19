@@ -8,6 +8,8 @@ import org.bukkit.util.Vector;
 
 import com.destroystokyo.paper.ParticleBuilder;
 
+import nl.dedouwe.Plugin;
+
 public class Shape {
     public static Shape CreateSphere(double radius, int density) {
         return new Shape((Consumer<Vector> maker) -> {
@@ -20,7 +22,20 @@ public class Shape {
              }
         });
     }
-
+    /**
+     * Location in Draw must be 0, 0, 0 in the dimension
+     * @param density between 0 and 1 with max 2 decimals
+     */
+    public static Shape CreateLine(Vector from, Vector to, double density) {
+        Plugin.instance.getLogger().info(from.toString()+to.toString());
+        return new Shape((Consumer<Vector> maker) -> {
+            for (double i = 0d; i <= 1d; i+=density) {
+                Plugin.instance.getLogger().info(from.clone().add(to.clone().subtract(from).multiply(i)).toString());
+                maker.accept(from.clone().add(to.clone().subtract(from).multiply(i)));
+            }
+            
+        });
+    }
     public static Shape CreateSpiral(double density, double height, double width) {
         return new Shape((Consumer<Vector> maker) -> {
             for (double i = 0; i <= height; i+=height/density) {

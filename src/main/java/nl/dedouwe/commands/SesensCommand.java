@@ -91,7 +91,7 @@ public class SesensCommand implements TabExecutor {
                 break;
             default:
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4" + command.getUsage()));
-                return false;
+                return true;
         }
         return true;
     }

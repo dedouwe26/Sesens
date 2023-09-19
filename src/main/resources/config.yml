@@ -14,7 +14,7 @@ cycle:
   hasStarted: false
   crates:
 
-# name:
+# uuid:
   # storageX: double
   # storageY: double
   # storageZ: double

@@ -20,6 +20,7 @@ public class Plugin extends JavaPlugin
 
     public NamespacedKey SesenType = new NamespacedKey(this, "type");
     public NamespacedKey SesenInstance = new NamespacedKey(this, "instance");
+    public NamespacedKey SesenSouls = new NamespacedKey(this, "souls");
 
     public ConfigUtil config = new ConfigUtil(getConfig(), this);
 

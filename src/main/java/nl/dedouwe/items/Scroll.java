@@ -22,7 +22,9 @@ public abstract class Scroll extends SesenItem {
         a.add(Component.empty());
         return a;
     }
-
+    /**
+     * @param cooldown In seconds
+     */
     public Scroll(Sources s, String name, TextComponent ... lore) {
         super(
             s.GetCustomModelData(), 

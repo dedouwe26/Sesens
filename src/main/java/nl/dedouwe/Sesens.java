@@ -17,7 +17,6 @@ import net.md_5.bungee.api.ChatColor;
 import nl.dedouwe.items.Items;
 import nl.dedouwe.items.SesenItem;
 import nl.dedouwe.utils.ConfigUtil;
-import nl.dedouwe.utils.ScrollUtil;
 
 public class Sesens {
     public ConfigUtil config;
@@ -33,6 +32,37 @@ public class Sesens {
      * 1.00
      * 0-99
      */
+
+     public static void ShowProgressBar(Player p, float amount, float max, String name) {
+        float progress = (amount/max)*10;
+
+        p.sendActionBar(Component
+            .text(name)
+            .color(NamedTextColor.AQUA)
+            .append(Component
+                .text(" [")
+                .color(NamedTextColor.WHITE)
+            )
+            .append(Component.text("=").color(progress >= 1 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 2 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 3 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 4 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 5 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 6 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 7 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 8 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 9 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component.text("=").color(progress >= 10 ? NamedTextColor.GREEN : NamedTextColor.WHITE))
+            .append(Component
+                .text("] ")
+                .color(NamedTextColor.WHITE)
+            )
+            .append(Component
+                .text(max)
+                .color(NamedTextColor.AQUA)
+            )
+        );
+    }
 
     public void StartCycle() {
         // TODO
@@ -51,14 +81,14 @@ public class Sesens {
     }
 
     public void ShowLevel(Player p) {
-        ScrollUtil.ShowProgressBar(p, (float)(GetLevel(p)-Math.floor(GetLevel(p))), 1f, "Level");
+        ShowProgressBar(p, (float)(GetLevel(p)-Math.floor(GetLevel(p))), 1f, "Level");
     }
 
     public double GetLevel(Player p) {
         return config.GetPlayerLevel(p.getUniqueId());
     }
     public void AddLevel(Player p, double xp) {
-        SetLevel(p, GetLevel(p)+xp);
+        SetLevel(p, (double) Math.round((GetLevel(p)+xp) * 100) / 100);
     }
     public void SetLevel(Player p, double lvl) {
         config.SetLevel(p.getUniqueId(), lvl);

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -17,7 +18,10 @@ import org.bukkit.persistence.PersistentDataType;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import nl.dedouwe.Plugin;
+import nl.dedouwe.Sesens;
 
 public abstract class SesenItem {
 
@@ -162,4 +166,87 @@ public abstract class SesenItem {
      * @param e
      */
     public void onHit(EntityDamageByEntityEvent e) {}
+
+    // Utilities
+    protected long cooldown = 0;
+
+    /**
+     * level restriction
+     * Checks cooldown
+     * adds XP
+     * Sets cooldown
+     * @param p The player
+     * @param lvlRestriction If 0 then nothing happens
+     * @param XP If 0 then nothing happens
+     * @param cooldownDuration In ticks, if 0 then nothing happens
+     * @return Can run code
+     */
+    protected boolean Test(Player p, double lvlRestriction, double XP, long cooldownDuration) {
+        if (!TestLvlRestriction(p, lvlRestriction)) {
+            p.sendActionBar(Component.text("Restricted, required lvl: ").color(NamedTextColor.RED).append(Component.text(lvlRestriction).color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)));
+            return false;
+        } else if (cooldown <= 0) {
+            if (!(XP==.0)) {AddLevels(p, XP);}
+            if (!(cooldownDuration==0)) {ApplyCooldown(cooldownDuration);}
+            return true;
+        }
+        return cooldown == 0 && TestLvlRestriction(p, lvlRestriction);
+    }
+
+    protected static SesenItem CustomEvent (ItemStack item) {
+        if (!item.hasItemMeta()) {return null;}
+        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenInstance, PersistentDataType.STRING)) {return null;}
+        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenType, PersistentDataType.STRING)) {return null;}
+        return getInstance(item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenInstance, PersistentDataType.STRING), item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenType, PersistentDataType.STRING));
+    }
+
+    protected void CreateTempRepeatingTask(Runnable task, long delay, long cooldown) {
+        int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Plugin.instance, task, 0l, delay);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Plugin.instance, () -> {
+            Bukkit.getScheduler().cancelTask(id);
+        }, cooldown);
+    }
+
+    /**
+     * @param duration In ticks
+     */
+    protected void ApplyCooldown(long duration) {
+        cooldown=duration;
+        CreateTempRepeatingTask(() -> {
+            cooldown--;
+        }, 1, duration);
+    }
+
+    protected ItemStack UpdateItem(ItemStack i) {
+        i.setItemMeta(this.item.getItemMeta());
+        return i;
+    }
+
+    protected void AddLevels(Player p, double amount) {
+        Sesens.instance.AddLevel(p, amount);
+        p.sendActionBar(Component.text("Just gained ").color(NamedTextColor.GREEN).append(Component.text(String.valueOf(amount)).color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).append(Component.text(" Levels .").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false)));
+    }
+    protected void AddLevels(Player p, double amount, boolean actionbar) {
+        Sesens.instance.AddLevel(p, amount);
+        if (!actionbar) {return;}
+        p.sendActionBar(Component.text("Just gained ").color(NamedTextColor.GREEN).append(Component.text(String.valueOf(amount)).color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)).append(Component.text(" Levels .").color(NamedTextColor.GREEN).decoration(TextDecoration.BOLD, false)));
+    }
+    /**
+     * For level restricted scrolls.
+     * @param p The player.
+     * @param lvl The required level.
+     * @return True if the player has the required lvl.
+     */
+    protected Boolean TestLvlRestriction(Player p, double lvl) {
+        if (Sesens.instance.GetLevel(p) >= lvl) {
+            return true;
+        }
+        else {
+            p.sendActionBar(Component.text("Current level: ").color(NamedTextColor.GREEN)
+            .append(Component.text(Sesens.instance.GetLevel(p)).color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)
+            .append(Component.text(", required: ").color(NamedTextColor.RED).decoration(TextDecoration.BOLD, false)
+            .append(Component.text(lvl).color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD)))));
+            return false;
+        }
+    }
 }
