@@ -33,11 +33,27 @@ public abstract class SesenItem {
 
     public String InstanceID;
 
+    /**
+     * 
+     * You can still use it but
+     *  >>> IF YOU CAN, Please use {@link #getInstance(ItemStack)} <<<
+     */
     public static SesenItem getInstance(String instance, String type) {
         if (Instances.containsKey(instance)) {
             return Instances.get(instance);
         } else {
             return CreateInstance(type, instance);
+        }
+    }
+    public static SesenItem getInstance(ItemStack item) {
+        if (!item.hasItemMeta()) {return null;}
+        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenInstance, PersistentDataType.STRING)) {return null;}
+        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenType, PersistentDataType.STRING)) {return null;}
+        String instance = item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenInstance, PersistentDataType.STRING);
+        if (Instances.containsKey(instance)) {
+            return Instances.get(instance);
+        } else {
+            return CreateInstance(item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenType, PersistentDataType.STRING), instance, item);
         }
     }
 
@@ -59,6 +75,23 @@ public abstract class SesenItem {
             try {
                 SesenItem inst = Items.ItemTypes.get(type).getClass().getConstructor(new Class[] {}).newInstance(new Object[] {});
                 inst.InstanceID = instance;
+                ItemMeta a = inst.item.getItemMeta();
+                a.getPersistentDataContainer().set(Plugin.instance.SesenInstance, PersistentDataType.STRING, instance);
+                inst.item.setItemMeta(a);
+                Instances.put(inst.InstanceID, inst);
+                return inst;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    private static SesenItem CreateInstance (String type, String instance, ItemStack item) {
+        if (Items.ItemTypes.containsKey(type)) {
+            try {
+                SesenItem inst = Items.ItemTypes.get(type).getClass().getConstructor(new Class[] {}).newInstance(new Object[] {});
+                inst.InstanceID = instance;
+                inst.item = item;
                 ItemMeta a = inst.item.getItemMeta();
                 a.getPersistentDataContainer().set(Plugin.instance.SesenInstance, PersistentDataType.STRING, instance);
                 inst.item.setItemMeta(a);
@@ -194,10 +227,7 @@ public abstract class SesenItem {
     }
 
     protected static SesenItem CustomEvent (ItemStack item) {
-        if (!item.hasItemMeta()) {return null;}
-        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenInstance, PersistentDataType.STRING)) {return null;}
-        if (!item.getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenType, PersistentDataType.STRING)) {return null;}
-        return getInstance(item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenInstance, PersistentDataType.STRING), item.getItemMeta().getPersistentDataContainer().get(Plugin.instance.SesenType, PersistentDataType.STRING));
+        return getInstance(item);
     }
 
     protected void CreateTempRepeatingTask(Runnable task, long delay, long cooldown) {

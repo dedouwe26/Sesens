@@ -37,4 +37,24 @@ public class ConfigUtil {
         configFile.set("players."+p.toString()+".storageZ", storageLocation.getZ());
         plugin.saveConfig();
     }
+    public void SaveTomb(Location l) {
+        configFile.set("cycle.tomb.world", l.getWorld().getName());
+        configFile.set("cycle.tomb.x", l.getX());
+        configFile.set("cycle.tomb.y", l.getY());
+        configFile.set("cycle.tomb.z", l.getZ());
+        plugin.saveConfig();
+    }
+    public Location GetTomb() {
+        if (configFile.get("cycle.tomb.world") == null) {
+            return null;
+        }
+        return new Location(Bukkit.getWorld((String)configFile.get("cycle.tomb.world")), (double)configFile.get("cycle.tomb.x"), (double)configFile.get("cycle.tomb.y"), (double)configFile.get("cycle.tomb.z"));
+    }
+    public void SaveTreasure(Location l, int i) {
+        configFile.set("cycle.treasures."+i+".world", l.getWorld().getName());
+        configFile.set("cycle.treasures."+i+".x", l.getX());
+        configFile.set("cycle.treasures."+i+".y", l.getY());
+        configFile.set("cycle.treasures."+i+".z", l.getZ());
+        plugin.saveConfig();
+    }
 }

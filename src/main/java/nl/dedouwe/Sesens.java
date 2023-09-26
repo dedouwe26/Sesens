@@ -1,18 +1,27 @@
 package nl.dedouwe;
 
+import java.io.IOException;
+import java.util.Random;
+import java.util.logging.Level;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Barrel;
+import org.bukkit.block.structure.Mirror;
+import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-
+import org.bukkit.structure.Structure;
 import com.destroystokyo.paper.ParticleBuilder;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.title.Title;
 import net.md_5.bungee.api.ChatColor;
 import nl.dedouwe.items.Items;
 import nl.dedouwe.items.SesenItem;
@@ -64,8 +73,55 @@ public class Sesens {
         );
     }
 
-    public void StartCycle() {
-        // TODO
+    public void SpawnTreasure (Location l, Random r) {
+        try {
+            Structure s = Bukkit.getStructureManager().loadStructure(getClass().getClassLoader().getResourceAsStream("SesensTreasure.nbt"));
+            s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
+            Plugin.instance.getLogger().info("There is a Treasure at " + l.toString());
+            l.add(2, 3, 1);
+            if (l.getBlock().getType()!=Material.BARREL) {
+                Plugin.instance.getLogger().info("Barrel not on the estimated place.");
+                return;
+            }
+            Barrel b = ((Barrel)l.getBlock().getState());
+            for (int j = 0; j < 4; j++) {
+                b.getInventory().setItem(r.nextInt(26), Items.Findables.get(r.nextInt(Items.Findables.size()-1)).item);
+            }
+            l.getBlock().getState().update(true);
+        } catch (IOException e) {
+            Plugin.instance.getLogger().log(Level.SEVERE, "Treasure file could not be read from!");
+        }
+    }
+
+    public void SpawnTomb (Location l, Random r) {
+        try {
+            Structure s = Bukkit.getStructureManager().loadStructure(getClass().getClassLoader().getResourceAsStream("SesensTomb.nbt"));
+            s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
+            Plugin.instance.getLogger().info("There is a Tomb at " + l.toString());
+            l.add(1, 5, 8);
+            if (l.getBlock().getType()!=Material.BARREL) {
+                Plugin.instance.getLogger().info("Barrel not on the estimated place.");
+                return;
+            }
+            Barrel b = ((Barrel)l.getBlock().getState());
+            b.getInventory().setItem(13, SesenItem.CreateInstance(Items.SUMMONERS_STONE.name).item);
+            l.getBlock().getState().update(true);
+        } catch (IOException e) {
+            Plugin.instance.getLogger().log(Level.SEVERE, "tomb file could not be read from!");
+        }
+    }
+
+    public void StartCycle(World w) {
+        Bukkit.getServer().showTitle(Title.title(Component.text("Start the hunt,").color(NamedTextColor.GOLD).decorate(TextDecoration.BOLD), Component.text("The Treasures are on the radar!").color(NamedTextColor.GREEN).decorate(TextDecoration.BOLD)));
+        Random r = new Random();
+        for (int i = 0; i < 7; i++) {
+            Location l = Bukkit.getWorlds().get(0).getHighestBlockAt(r.nextInt(-300, 300), r.nextInt(-300, 300)).getLocation().subtract(0, 2, 0);
+            SpawnTreasure(l.clone(), new Random());
+            config.SaveTreasure(l, i);
+        }
+        Location l = Bukkit.getWorlds().get(0).getHighestBlockAt(r.nextInt(-400, 400), r.nextInt(-400, 400)).getLocation().subtract(0, 2, 0);
+        SpawnTomb(l.clone(), new Random());
+        config.SaveTomb(l);
     }
 
     public void showPlayerStorage(Player p, Player toSee) {
@@ -122,15 +178,11 @@ public class Sesens {
                 return;
             }
             // No sesenItem
-            if (!(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer()
-                    .has(Plugin.instance.SesenType, PersistentDataType.STRING))) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        "&4Hold a Sesen Item or type in the name of it in..."));
+            if (!(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(Plugin.instance.SesenType, PersistentDataType.STRING))) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&4Hold a Sesen Item or type in the name of it in..."));
                 return;
             }
-            p.sendMessage(SesenItem.getInstance(p.getInventory().getItemInMainHand().getItemMeta()
-                    .getPersistentDataContainer().get(Plugin.instance.SesenInstance, PersistentDataType.STRING), p.getInventory().getItemInMainHand().getItemMeta()
-                    .getPersistentDataContainer().get(Plugin.instance.SesenType, PersistentDataType.STRING)).GetHelp());
+            p.sendMessage(SesenItem.getInstance(p.getInventory().getItemInMainHand()).GetHelp());
         } else {
             p.sendMessage(Items.ItemTypes.get(item).GetHelp());
         }

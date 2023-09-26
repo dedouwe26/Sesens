@@ -1,18 +1,19 @@
 # The data of a player: with storage x,y,z,world and lvl and Cycle data
 
-
-
-
+# tomb:
+#   x: int
+#   y: int
+#   z:  int
+#   world: str
 # crates-num:
 #   x: int
 #   y: int
 #   z: int
 #   world: str
-#   type: str
 
 cycle:
-  hasStarted: false
-  crates:
+  tomb:
+  treasures:
 
 # uuid:
   # storageX: double

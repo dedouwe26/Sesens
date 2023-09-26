@@ -17,7 +17,7 @@ public class StingScroll extends Scroll {
                 .color(NamedTextColor.GRAY),
             Component.text("Stops us...'")
                 .color(NamedTextColor.GRAY),
-            Component.text("(Can heal)")
+            Component.text("(Can heal)").color(NamedTextColor.DARK_GRAY)
         );
     }
 

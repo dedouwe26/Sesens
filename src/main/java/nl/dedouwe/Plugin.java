@@ -22,12 +22,13 @@ public class Plugin extends JavaPlugin
     public NamespacedKey SesenInstance = new NamespacedKey(this, "instance");
     public NamespacedKey SesenSouls = new NamespacedKey(this, "souls");
 
-    public ConfigUtil config = new ConfigUtil(getConfig(), this);
+    public ConfigUtil config;
 
     public void onEnable()
     {
         instance = this;
         saveDefaultConfig();
+        config = new ConfigUtil(getConfig(), this);
 
         new Sesens(config, this);
         getCommand("sesens").setExecutor(new SesensCommand());

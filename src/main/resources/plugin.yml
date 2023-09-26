@@ -22,7 +22,7 @@ permissions:
 commands:
   sesens:
     description: "The main command of Sesens"
-    usage: "/sesens <storage:lvl:setlvl:give:startcycle:help> [item?:player?] [lvl?]"
+    usage: "§4/sesens <storage:lvl:setlvl:give:startcycle:help> [item?:player?] [lvl?]"
     aliases: ["sesens", "sesen", "ses"]
     permission: "sesens.command.use"
     permission-message: "§4You can't use this command!"
