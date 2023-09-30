@@ -73,42 +73,44 @@ public class Sesens {
         );
     }
 
-    public void SpawnTreasure (Location l, Random r) {
+    public Structure GetStructure (String path) {
+        Structure s = Bukkit.getStructureManager().createStructure();
         try {
-            Structure s = Bukkit.getStructureManager().loadStructure(getClass().getClassLoader().getResourceAsStream("SesensTreasure.nbt"));
-            s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
-            Plugin.instance.getLogger().info("There is a Treasure at " + l.toString());
-            l.add(2, 3, 1);
-            if (l.getBlock().getType()!=Material.BARREL) {
-                Plugin.instance.getLogger().info("Barrel not on the estimated place.");
-                return;
-            }
-            Barrel b = ((Barrel)l.getBlock().getState());
-            for (int j = 0; j < 4; j++) {
-                b.getInventory().setItem(r.nextInt(26), Items.Findables.get(r.nextInt(Items.Findables.size()-1)).item);
-            }
-            l.getBlock().getState().update(true);
+            s = Bukkit.getStructureManager().loadStructure(getClass().getClassLoader().getResourceAsStream(path));
         } catch (IOException e) {
-            Plugin.instance.getLogger().log(Level.SEVERE, "Treasure file could not be read from!");
+            Plugin.instance.getLogger().log(Level.SEVERE, "File could not be read from!");
         }
+        return s;
+    }
+
+    public void SpawnTreasure (Location l, Random r) {
+        Structure s = GetStructure("SesensTreasure.nbt");
+        s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
+        Plugin.instance.getLogger().info("There is a Treasure at " + l.toString());
+        l.add(2, 3, 1);
+        if (l.getBlock().getType()!=Material.BARREL) {
+            Plugin.instance.getLogger().info("Barrel not on the estimated place.");
+            return;
+        }
+        Barrel b = ((Barrel)l.getBlock().getState());
+        for (int j = 0; j < 4; j++) {
+            b.getInventory().setItem(r.nextInt(26), Items.Findables.get(r.nextInt(Items.Findables.size()-1)).item);
+        }
+        l.getBlock().getState().update(true);
     }
 
     public void SpawnTomb (Location l, Random r) {
-        try {
-            Structure s = Bukkit.getStructureManager().loadStructure(getClass().getClassLoader().getResourceAsStream("SesensTomb.nbt"));
-            s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
-            Plugin.instance.getLogger().info("There is a Tomb at " + l.toString());
-            l.add(1, 5, 8);
-            if (l.getBlock().getType()!=Material.BARREL) {
-                Plugin.instance.getLogger().info("Barrel not on the estimated place.");
-                return;
-            }
-            Barrel b = ((Barrel)l.getBlock().getState());
-            b.getInventory().setItem(13, SesenItem.CreateInstance(Items.SUMMONERS_STONE.name).item);
-            l.getBlock().getState().update(true);
-        } catch (IOException e) {
-            Plugin.instance.getLogger().log(Level.SEVERE, "tomb file could not be read from!");
+        Structure s = GetStructure("SesensTomb.nbt");
+        s.place(l, false, StructureRotation.NONE, Mirror.NONE, 0, 1, r);
+        Plugin.instance.getLogger().info("There is a Tomb at " + l.toString());
+        l.add(1, 5, 8);
+        if (l.getBlock().getType()!=Material.BARREL) {
+            Plugin.instance.getLogger().info("Barrel not on the estimated place.");
+            return;
         }
+        Barrel b = ((Barrel)l.getBlock().getState());
+        b.getInventory().setItem(13, SesenItem.CreateInstance(Items.SUMMONERS_STONE.name).item);
+        l.getBlock().getState().update(true);
     }
 
     public void StartCycle(World w) {

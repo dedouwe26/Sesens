@@ -64,16 +64,13 @@ public class ShadowScroll extends Scroll {
                     ParticleUtil.createColoredParticle(l, Color.BLACK, 1.3f);
                     l.subtract(v);
                 });
-                for (Entity entity : l.getNearbyEntities(14, 14, 14)) {
-                    if (entity instanceof LivingEntity) {
-                        if (entity.getUniqueId()!=e.getPlayer().getUniqueId()) {
-                            l.getWorld().playSound(l, Sound.ENTITY_ENDERMAN_HURT, 1, 0.5f);
-                            ((LivingEntity)entity).damage(7);
-                            Shape.CreateLine(l.toVector(), entity.getLocation().toVector().add(new Vector(0, 0.6, 0)), 0.1).Make((v)->{
-                            ParticleUtil.createColoredParticle(new Location(l.getWorld(), v.getX(), v.getY(), v.getZ()), Color.PURPLE, 1.2f);
-                            });
-                        }
-                        
+                for (LivingEntity entity : l.getNearbyLivingEntities(14, 14, 14)) {
+                    if (entity.getUniqueId()!=e.getPlayer().getUniqueId()) {
+                        l.getWorld().playSound(l, Sound.ENTITY_ENDERMAN_HURT, 1, 0.5f);
+                        ((LivingEntity)entity).damage(7);
+                        Shape.CreateLine(l.toVector(), entity.getLocation().toVector().add(new Vector(0, 0.6, 0)), 0.1).Make((v)->{
+                        ParticleUtil.createColoredParticle(new Location(l.getWorld(), v.getX(), v.getY(), v.getZ()), Color.PURPLE, 1.2f);
+                        });
                     }
                 }
             }, 10, 220);

@@ -27,10 +27,8 @@ public class Shape {
      * @param density between 0 and 1 with max 2 decimals
      */
     public static Shape CreateLine(Vector from, Vector to, double density) {
-        Plugin.instance.getLogger().info(from.toString()+to.toString());
         return new Shape((Consumer<Vector> maker) -> {
             for (double i = 0d; i <= 1d; i+=density) {
-                Plugin.instance.getLogger().info(from.clone().add(to.clone().subtract(from).multiply(i)).toString());
                 maker.accept(from.clone().add(to.clone().subtract(from).multiply(i)));
             }
             

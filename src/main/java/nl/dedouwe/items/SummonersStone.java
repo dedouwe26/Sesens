@@ -23,8 +23,6 @@ public class SummonersStone extends SesenItem {
         return Component.text("Use this at the center of the TOMB to summon new treasures in the world (hold right-click)...").color(NamedTextColor.GRAY);
     }
     public void onUse(PlayerInteractEvent e) {
-        Plugin.instance.getLogger().info(Plugin.instance.config.GetTomb().toString());
-        Plugin.instance.getLogger().info(e.getPlayer().getLocation().getBlock().getLocation().toString());
         if (!e.getPlayer().getLocation().getBlock().getLocation().clone().equals(Plugin.instance.config.GetTomb().add(7, 2, 7))) {
             e.getPlayer().sendMessage(Component.text("Go to the Center of the Tomb!").color(NamedTextColor.GOLD).decorate(TextDecoration.BOLD));
             e.setCancelled(true);
@@ -40,5 +38,4 @@ public class SummonersStone extends SesenItem {
     public void onDeactivate(PlayerInteractEvent e) {
         e.setCancelled(true);
     }
-    // TODO: new texture, add to schematic
 }
