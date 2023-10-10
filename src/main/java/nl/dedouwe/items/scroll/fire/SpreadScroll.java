@@ -3,6 +3,7 @@ package nl.dedouwe.items.scroll.fire;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -33,6 +34,7 @@ public class SpreadScroll extends Scroll {
         Location position = e.getPlayer().getEyeLocation().clone();
         for (int i = 0; i < 23; i++) {
             position.add(direction);
+            position.getWorld().playSound(position, Sound.ENTITY_BLAZE_SHOOT, 2, 1f);
             new ParticleBuilder(Particle.FLAME).count(0).location(position).spawn();
             if (position.getBlock().getType()==Material.AIR) {continue;}
             for (Entity entity : position.getNearbyEntities(1, 1, 1)) {
@@ -52,6 +54,7 @@ public class SpreadScroll extends Scroll {
         Location position = e.getPlayer().getEyeLocation().clone();
         for (int i = 0; i < 27; i++) {
             position.add(direction);
+            position.getWorld().playSound(position, Sound.ENTITY_BLAZE_SHOOT, 2, 2f);
             new ParticleBuilder(Particle.FLAME).count(0).location(position).spawn();
             new ParticleBuilder(Particle.CRIT).count(0).location(position.clone().subtract(direction.clone().multiply(0.4))).spawn();
             if (position.getBlock().getType()==Material.AIR) {continue;}

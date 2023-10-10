@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.entity.LivingEntity;
@@ -12,15 +12,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.structure.Structure;
 import org.bukkit.util.Vector;
 
-import com.destroystokyo.paper.ParticleBuilder;
-
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import nl.dedouwe.Sesens;
 import nl.dedouwe.items.Scroll;
 import nl.dedouwe.items.Sources;
-import nl.dedouwe.utils.Shape;
 
 public class MeteorScroll extends Scroll {
 
@@ -42,20 +39,27 @@ public class MeteorScroll extends Scroll {
             if (pos.getBlock().getType()==Material.AIR) {continue;}
             Structure s = Sesens.instance.GetStructure("SesensMeteor.nbt");
             s.place(pos.subtract(direction).subtract(8, 4, 6).getBlock().getLocation(), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random());
+            pos.getWorld().playSound(pos, Sound.ENTITY_GENERIC_EXPLODE, 2, 1f);
             for (LivingEntity entity : pos.getNearbyLivingEntities(15, 15, 15)) {
                 entity.damage(20);
                 entity.setFireTicks(70);
             }
-
-            Shape.CreateLine(pos.clone().add(-3, -1, 3).toVector(), pos.clone().add(-7, 3, 8).toVector(), 0.05).Make((v)->{
-                // TODO
-                new ParticleBuilder(Particle.FLAME).location(new Location(pos.getWorld(), v.getX(), v.getY(), v.getZ())).force(true).count(0).spawn();
-            });;
-            break;
         }
     }
     public void onActivate(PlayerInteractEvent e) {
-        if (!Test(e.getPlayer(), 18, 0, 200)) {return;}
+        if (!Test(e.getPlayer(), 18, 0, 220)) {return;}
+        
+        for (LivingEntity player : e.getPlayer().getLocation().getNearbyLivingEntities(20, 20, 20)) {
+            if (player.getUniqueId().equals(e.getPlayer().getUniqueId())) {continue;}
+            Location pos = player.getLocation().getBlock().getLocation();
+            Structure s = Sesens.instance.GetStructure("SesensMeteor.nbt");
+            s.place(pos.subtract(8, 4, 6).getBlock().getLocation(), false, StructureRotation.NONE, Mirror.NONE, 0, 1, new Random());
+            pos.getWorld().playSound(pos, Sound.ENTITY_GENERIC_EXPLODE, 2, 1f);
+            for (LivingEntity entity : pos.getNearbyLivingEntities(15, 15, 15)) {
+                entity.damage(20);
+                entity.setFireTicks(70);
+            }
+        }
     }
     
 }

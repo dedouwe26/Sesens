@@ -8,8 +8,6 @@ import org.bukkit.util.Vector;
 
 import com.destroystokyo.paper.ParticleBuilder;
 
-import nl.dedouwe.Plugin;
-
 public class Shape {
     public static Shape CreateSphere(double radius, int density) {
         return new Shape((Consumer<Vector> maker) -> {
