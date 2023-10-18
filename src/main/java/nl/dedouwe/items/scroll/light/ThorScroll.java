@@ -1,6 +1,5 @@
 package nl.dedouwe.items.scroll.light;
 
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import net.kyori.adventure.text.Component;
@@ -17,10 +16,9 @@ public class ThorScroll extends Scroll {
 
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Use right-click for a lightning, and shift left-click for better one.").color(NamedTextColor.GRAY);
+        return Component.text("Use right-click for a lightning, and shift left-click for a lightning dome.").color(NamedTextColor.GRAY);
     }
     public void onUse(PlayerInteractEvent e) {}
     public void onActivate(PlayerInteractEvent e) {}
-    public void onActivate(EntityDamageByEntityEvent e) {}
-    
+
 }

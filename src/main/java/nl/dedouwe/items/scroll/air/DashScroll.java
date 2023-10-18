@@ -32,7 +32,6 @@ public class DashScroll extends Scroll implements Listener {
     public TextComponent GetHelp() {
         return Component.text("While holding it, use shift + look to dash, (HOLD SHIFT WHEN YOU LAND).").color(NamedTextColor.GRAY);
     }
-    // TODO: custom... 
 
     void onMove (PlayerMoveEvent e) {
         if (!e.getPlayer().isSneaking()) {return;}

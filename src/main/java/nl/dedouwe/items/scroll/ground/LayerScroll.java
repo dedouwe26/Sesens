@@ -51,7 +51,7 @@ public class LayerScroll extends Scroll {
         e.setCancelled(true);
     }
     public void onHit(PlayerInteractEvent e) {
-        if (!Test(e.getPlayer(), 8, 0.1, 60)) {return;}
+        if (!Test(e.getPlayer(), 8, 0.1, 70)) {return;}
         for (LivingEntity entity : e.getPlayer().getLocation().getNearbyLivingEntities(20, 20, 20)) {
             if (entity instanceof Player) {
                 if (((Player)entity).getUniqueId().equals(e.getPlayer().getUniqueId())) {continue;}
@@ -61,13 +61,13 @@ public class LayerScroll extends Scroll {
                 MoveUp(l.clone().add(v), 4);
             });
             l.getWorld().playSound(l, Sound.ENTITY_TURTLE_EGG_CRACK, 3, 0.2f);
-            Shape.CreateCircle(3, 13).Make((v)->{
+            Shape.CreateCircle(2, 13).Make((v)->{
                 ParticleUtil.createVelocityParticle(Particle.CRIT, l.clone().add(v.add(new Vector(0, 0.1, 0))), 0, -0.2 , 0);
             });
         }
     }
     public void onDeactivate(PlayerInteractEvent e) {
-        if (!Test(e.getPlayer(), 7, .1, 30)) {return;}
+        if (!Test(e.getPlayer(), 7, .1, 18)) {return;}
         Vector direction = e.getPlayer().getLocation().getDirection().clone().multiply(.7);
         Location position = e.getPlayer().getEyeLocation().clone();
         for (int i = 0; i < 27; i++) {
