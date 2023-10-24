@@ -37,7 +37,7 @@ public class ShadowScroll extends Scroll {
             Location l = e.getItemDrop().getLocation().clone();
             e.getPlayer().getInventory().addItem(e.getItemDrop().getItemStack());
             e.getItemDrop().remove();
-            l.createExplosion(7, true);
+            l.createExplosion(10, true);
             CreateTempRepeatingTask(()->{
                 Shape.CreateSphere(5, 28).Make((v)->{
                     l.add(v);
@@ -66,7 +66,7 @@ public class ShadowScroll extends Scroll {
                 });
                 for (LivingEntity entity : l.getNearbyLivingEntities(14, 14, 14)) {
                     if (entity.getUniqueId()!=e.getPlayer().getUniqueId()) {
-                        l.getWorld().playSound(l, Sound.ENTITY_ENDERMAN_HURT, 1, 0.5f);
+                        l.getWorld().playSound(l, Sound.ENTITY_ENDERMAN_HURT, 1, -1f);
                         ((LivingEntity)entity).damage(7);
                         Shape.CreateLine(l.toVector(), entity.getLocation().toVector().add(new Vector(0, 0.6, 0)), 0.1).Make((v)->{
                         ParticleUtil.createColoredParticle(new Location(l.getWorld(), v.getX(), v.getY(), v.getZ()), Color.PURPLE, 1.2f);

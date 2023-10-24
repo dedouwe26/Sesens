@@ -43,7 +43,7 @@ public class ThrowScroll extends Scroll {
             d.setBlock(Material.COBBLESTONE.createBlockData());
         });
         Location loc = e.getPlayer().getEyeLocation().clone();
-        loc.getWorld().playSound(display.getLocation(), Sound.ENTITY_ARROW_SHOOT, 4, .3f);
+        loc.getWorld().playSound(display.getLocation(), Sound.ENTITY_ARROW_SHOOT, 4, -1f);
         int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(Plugin.instance, ()->{
             display.setTransformation(new Transformation(new Vector3f(-.65f,.65f,display.getTransformation().getTranslation().z+0.8f), new AxisAngle4f(0,0,0,0), new Vector3f(1.3f, 1.3f, 1.3f), new AxisAngle4f(0,0,0,0)));
             loc.add(direction);
@@ -97,7 +97,7 @@ public class ThrowScroll extends Scroll {
             boolean exit = false;
             for (LivingEntity entity : position.getNearbyLivingEntities(1.2, 1.2, 1.2)) {
                 if (entity instanceof Player) {
-                    if (((Player)entity).getUniqueId().toString().equals(e.getPlayer().getUniqueId().toString())) {
+                    if (((Player)entity).getUniqueId().equals(e.getPlayer().getUniqueId())) {
                         continue;
                     }
                 }

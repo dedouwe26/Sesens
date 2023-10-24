@@ -44,7 +44,7 @@ public class SoulFetcherScroll extends Scroll implements Listener {
     }
     @Override
     public TextComponent GetHelp() {
-        return Component.text("Left-click to fetch someone's soul (Creepers and Players), shift right-click to spit it out (-amount of enemy's*2). And drop it to summon a wither (-19) (that helps you).").color(NamedTextColor.GRAY);
+        return Component.text("Left-click to fetch someone's soul (Creepers and Players and Villagers), shift right-click to spit it out (-amount of enemy's*2). And drop it to summon a wither (-19) (that helps you).").color(NamedTextColor.GRAY);
     }
     public void onHit(EntityDamageByEntityEvent e) {
         if (!Test((Player)e.getDamager(), 12, 0, 110)) {return;}

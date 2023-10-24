@@ -14,7 +14,7 @@ import nl.dedouwe.utils.ParticleUtil;
 
 public class BlowScroll extends Scroll {
     public BlowScroll() {
-        super(Sources.Air, "Blow", Component.text("It's a bit windy outside.").color(NamedTextColor.GRAY), 
+        super(Sources.Air, "Blow", Component.text("There is a lot of wind outside.").color(NamedTextColor.GRAY), 
                                                 Component.text("(Go game some more)").color(NamedTextColor.DARK_GRAY));
     }
 
