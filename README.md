@@ -8,7 +8,7 @@ Permission for using the admin commands. \
 `sesens.setStorage`: \
 Permission for setting a scroll storage. \
 `sesens.canUseScroll`: \
-Permission for using a scroll. \
+Permission for using a scroll.
 ## Cycle
 To start the cycle, type in the chat '/sesens startcycle'. \
 This does require sesens.commands.admin permission; This defaults to OP. \
