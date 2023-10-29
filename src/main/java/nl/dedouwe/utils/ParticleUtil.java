@@ -20,14 +20,14 @@ public class ParticleUtil {
             .spawn();
     }
     public static void createBlockParticle (Location l, Block b) {
-        new ParticleBuilder(Particle.BLOCK_DUST)
+        new ParticleBuilder(Particle.BLOCK_CRACK)
             .location(l)
             .data(b.getBlockData())
             .force(true)
             .spawn();
     }
     public static void createBlockParticle (Location l, Material b) {
-        new ParticleBuilder(Particle.BLOCK_DUST)
+        new ParticleBuilder(Particle.BLOCK_CRACK)
             .location(l)
             .data(b.createBlockData())
             .force(true)

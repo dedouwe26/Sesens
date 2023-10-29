@@ -32,6 +32,6 @@ public enum Sources {
                 this == Sources.Ground ? TextColor.color(153,97,0) : 
                 this == Sources.Air ? NamedTextColor.WHITE :
                 this == Sources.Water ? NamedTextColor.BLUE :
-                this == Sources.Unobtainable ? NamedTextColor.LIGHT_PURPLE : NamedTextColor.GRAY;
+                this == Sources.Unobtainable ? NamedTextColor.DARK_PURPLE : NamedTextColor.GRAY;
     }
 }

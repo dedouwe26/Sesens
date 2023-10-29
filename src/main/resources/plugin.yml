@@ -1,6 +1,6 @@
 name: "Sesens"
 main: "nl.dedouwe.Plugin"
-version: "1.0-SNAPSHOT"
+version: "1.0.1"
 api-version: '1.20'
 description: "This is a plugin that adds the power to cast powerful spells called 'Sesens' scattered around the world."
 author: "dedouwe"
