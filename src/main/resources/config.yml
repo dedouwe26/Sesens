@@ -5,7 +5,7 @@
 #   y: int
 #   z:  int
 #   world: str
-# crates-num:
+# treasure-num:
 #   x: int
 #   y: int
 #   z: int
