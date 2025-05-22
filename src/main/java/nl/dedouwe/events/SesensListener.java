@@ -48,7 +48,7 @@ public class SesensListener implements Listener {
 
     @EventHandler
     void onPlayerJoin(PlayerJoinEvent e) {
-        e.getPlayer().setResourcePack("https://github.com/dedouwe26/dedouwe26.github.io/raw/main/SesensPack.zip", "C08758D9F2FC4D0C41F541FECC3189123C4C3909", true);
+        e.getPlayer().setResourcePack("https://raw.githubusercontent.com/dedouwe26/Sesens/refs/heads/main/SesensPack.zip", "C08758D9F2FC4D0C41F541FECC3189123C4C3909", true);
     }
 
     @EventHandler
